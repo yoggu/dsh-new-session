@@ -1,0 +1,34 @@
+{
+  "name": "dsh-new",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DeepSeek Harness plugin: a /new command that starts a new Session in the current Workspace and opens it, exactly like the workspace row's + button.",
+  "type": "module",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  }
+}

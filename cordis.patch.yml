@@ -1,0 +1,14 @@
+# dsh-new bundle layer.
+#
+# Eine Zeile ohne Dienste. Sie macht das Paket zu einem aktivierten
+# Loader-Eintrag, und genau das braucht `dsh-client-modules`: es setzt den
+# Browser-Boot-Graph aus den aktivierten Einträgen zusammen und liefert je
+# `dsh.client`-Deklaration ein Bundle unter `/plugins` aus. Ohne gemountete
+# Zeile existiert die Client-Hälfte nur auf der Platte.
+#
+# Der Befehl selbst lebt vollständig im Browser (siehe `client.js`): eine
+# Sitzung zu erstellen und zu öffnen ist UI-Navigation, und die gehört dem
+# Client.
+- insert:
+    - id: dsh-new
+      name: 'dsh-new'
