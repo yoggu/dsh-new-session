@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "New Session",
+    "description": "Adds /new to start and open a session in the current workspace without disturbing the composer draft."
+  }
+}
