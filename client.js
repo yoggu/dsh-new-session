@@ -1,5 +1,5 @@
 /**
- * Browser half of `dsh-new`: the `/new` command.
+ * Browser half of `dsh-new-session`: the `/new` command.
  *
  * Hand-written in the `window.__ModuleLoader__.load` format — no JSX, no
  * bundler — and declared through `exports["./client"]` plus `dsh.client` in
@@ -15,11 +15,11 @@
  * composer stay untouched — unlike a host command, whose bare invocation would
  * be a message.
  *
- * @module dsh-new/client
+ * @module dsh-new-session/client
  */
 
 window.__ModuleLoader__.load({
-  id: 'dsh-new',
+  id: 'dsh-new-session',
   factory: () => {
     const module = { exports: {} }
     const exports = module.exports

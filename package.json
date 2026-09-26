@@ -1,5 +1,5 @@
 {
-  "name": "dsh-new",
+  "name": "dsh-new-session",
   "version": "0.1.0",
   "private": true,
   "description": "DeepSeek Harness plugin: a /new command that starts a new Session in the current Workspace and opens it, exactly like the workspace row's + button.",

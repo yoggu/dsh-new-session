@@ -1,4 +1,4 @@
-# dsh-new
+# dsh-new-session
 
 An `/new` command for the DSH input field: starts a new session in the
 current workspace and opens it — the same thing the **+** button on the

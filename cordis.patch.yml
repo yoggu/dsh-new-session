@@ -1,4 +1,4 @@
-# dsh-new bundle layer.
+# dsh-new-session bundle layer.
 #
 # Eine Zeile ohne Dienste. Sie macht das Paket zu einem aktivierten
 # Loader-Eintrag, und genau das braucht `dsh-client-modules`: es setzt den
@@ -10,5 +10,5 @@
 # Sitzung zu erstellen und zu öffnen ist UI-Navigation, und die gehört dem
 # Client.
 - insert:
-    - id: dsh-new
-      name: 'dsh-new'
+    - id: dsh-new-session
+      name: 'dsh-new-session'
