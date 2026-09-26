@@ -1,59 +1,59 @@
 # dsh-new
 
-Ein `/new`-Befehl für das DSH-Eingabefeld: startet eine neue Sitzung im
-aktuellen Workspace und öffnet sie — dasselbe, was der **+**-Button an der
-Workspace-Zeile tut.
+An `/new` command for the DSH input field: starts a new session in the
+current workspace and opens it — the same thing the **+** button on the
+workspace row does.
 
 ```
 /new
 ```
 
-Kein Argument, keine Konfiguration: der Befehl folgt dem Workspace, in dem du
-gerade arbeitest.
+No argument, no configuration: the command follows the workspace you are
+currently working in.
 
-## Was er tut
+## What it does
 
-Der Client-Befehl ruft `uiWorkspace.startSession()` ohne Argument auf. Diese
-eine Aktion startet den „New Session"-Ablauf, erbt den aktuellen (ohne einen
-aktuellen: den zuletzt benutzten) Workspace und navigiert auf die erzeugte
-Sitzung. Genau das tut auch der **+**-Button der Workspace-Zeile; sein oberer
-Geschwister-Button in der Sidebar tut es ohne Workspace-Bezug.
+The client command calls `uiWorkspace.startSession()` without an argument. This
+single action starts the “New Session” flow, inherits the current workspace (or,
+if there is no current one, the most recently used workspace), and navigates to
+the created session. The **+** button on the workspace row does exactly the same
+thing; its upper sibling button in the sidebar does it without any workspace
+context.
 
-Eine Sitzung, die bereits leer im Workspace liegt, wird wiederverwendet statt
-eine zweite anzulegen — das ist die Regel des Session-Controllers
-(`connectWorkspace`), nicht dieses Plugins.
+A session that is already empty in the workspace is reused instead of creating
+a second one — that is the session controller’s (`connectWorkspace`) rule, not
+this plugin’s.
 
-## Warum im Browser und nicht im Host
+## Why in the browser and not the host
 
-Eine Sitzung *anzulegen* kann auch der Host (`sessionController.create`). Nur:
-öffnen kann er sie nicht. Eine Host-Befehlsinvocation würde eine Sitzung
-erzeugen, während der Browser auf der alten Konversation stehen bleibt — die
-neue Sitzung erschiene erst beim nächsten Refresh in der Sidebar. Erstellen und
-Öffnen sind eine UI-Navigation, und die besitzt der Client.
+The host (`sessionController.create`) can also *create* a session. It just
+cannot open it. A host command invocation would create a session while the
+browser remained on the old conversation — the new session would not appear in
+the sidebar until the next refresh. Creating and opening are UI navigation, and
+the client owns that.
 
-Deshalb ist die Host-Hälfte (`lib/index.js`) leer. Sie existiert als
-**aktivierter Loader-Eintrag**: `dsh-client-modules` setzt den Browser-Boot-Graph
-aus den aktivierten Einträgen zusammen und liefert je `dsh.client`-Deklaration
-ein Bundle unter `/plugins` aus. Ohne gemountete Zeile würde `client.js` nie
-geladen.
+That is why the host half (`lib/index.js`) is empty. It exists as an **enabled
+loader entry**: `dsh-client-modules` assembles the browser boot graph from the
+enabled entries and serves a bundle under `/plugins` for each `dsh.client`
+declaration. Without a mounted entry, `client.js` would never be loaded.
 
-## Nebenwirkungen
+## Side effects
 
-- Eine `action` sendet nichts. Ein Entwurf samt Anhang-Karten im Composer bleibt
-  unangetastet — anders als bei einem Host-Befehl, dessen bloße Invocation eine
-  Nachricht wäre.
-- `/new` ist ein Client-Befehl ohne Host-Katalogzeile. Kollidiert der Name mit
-  einem Host-Befehl, scheitert die Kandidatensynthese laut, statt ihn zu
-  verdrängen.
-- Der Befehl braucht die Web-Composition (`ui-commands` und `ui-workspace`
-  gemountet); in einem UI-losen Lauf gibt es die Befehlsfläche nicht.
+- An `action` sends nothing. A draft, including attachment cards in the
+  composer, remains untouched — unlike a host command, whose mere invocation
+  would be a message.
+- `/new` is a client command without a host catalog entry. If its name collides
+  with a host command, candidate synthesis fails loudly instead of displacing
+  it.
+- The command requires the web composition (`ui-commands` and `ui-workspace`
+  mounted); in a UI-less run, the command surface does not exist.
 
 ## Installation
 
-Nichts zu konfigurieren. Die Zeile in `cordis.patch.yml` ist leer, weil das
-Plugin keine Deployment-Eigenschaft kennt.
+Nothing to configure. The line in `cordis.patch.yml` is empty because the
+plugin has no deployment property.
 
-Neu gemountete Client-Bundles erscheinen nicht im laufenden Prozess:
-`dsh-client-modules` setzt den Boot-Graph beim Start zusammen. Nach dem
-Hinzufügen des Plugins also einmal den Harness neu starten (mit `/dsh-restart`,
-falls vorhanden) und die Seite neu laden.
+Newly mounted client bundles do not appear in the running process:
+`dsh-client-modules` assembles the boot graph at startup. After adding the
+plugin, restart the Harness once (with `/dsh-restart`, if available) and reload
+the page.
