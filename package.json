@@ -1,6 +1,6 @@
 {
   "name": "dsh-new-session",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Adds /new to start and open a session in the current workspace without disturbing the composer draft.",
   "icon": "./icon.svg",
