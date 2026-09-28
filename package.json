@@ -1,6 +1,6 @@
 {
   "name": "dsh-new-session",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "Adds /new to start and open a session in the current workspace without disturbing the composer draft.",
   "icon": "./icon.svg",
@@ -33,6 +33,7 @@
     }
   },
   "engines": {
-    "node": ">=22.19.0"
+    "node": ">=22.19.0",
+    "dsh": "^0.1.7-rc.2 || ^0.2.0-rc.1"
   }
 }
